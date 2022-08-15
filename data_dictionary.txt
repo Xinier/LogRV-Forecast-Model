@@ -1,0 +1,59 @@
+The database consists of four tables:
+1. log_rv: log realised variance (RV) of CBA
+2. log_rv_feature: log RV based features
+3. rng_feature: range based features
+4. qtl_rng_feature: quantile range based features
+
+Below is the data dictionary and notes on variables.
+
+------------------------------------------------------
+log_rv
+
+- date: date of log RV [t] (string, 'yyyy-mm-dd')
+- log_rv: log RV [t] (float)
+
+------------------------------------------------------
+log_rv_feature
+
+- date: date of log RV for which the features are constructed [t] (string, 'yyyy-mm-dd')
+- log_rv_lag1: log RV of the previous trading day [t-1] (float)
+- log_rv_avg5: average log RV over previous 5 trading days [t-1, t-2, ..., t-5] (float)
+- log_rv_avg22: average log RV over previous 22 trading days [t-1, t-2, ..., t-22] (float)
+- log_rv_avg253: average log RV over previous 253 trading days [t-1, t-2, ..., t-253] (float)
+- log_rv_up: binary variable taking value 1 if log_rv_avg22 > log_rv_avg253, and 0 otherwise [t-1, t-2, ..., t-253] (int, 0-1)
+
+------------------------------------------------------
+rng_feature
+
+- date: date of log RV for which the features are constructed [t] (string, 'yyyy-mm-dd')
+- rng_lag1: range of the previous trading day [t-1] (float)
+- rng_avg5: average range over previous 5 trading days [t-1, t-2, ..., t-5] (float)
+- rng_avg22: average range over previous 22 trading days [t-1, t-2, ..., t-22] (float)
+- rng_avg253: average range over previous 253 trading days [t-1, t-2, ..., t-253] (float)
+- rng_up: binary variable taking value 1 if rng_avg22 > rng_avg253, and 0 otherwise [t-1, t-2, ..., t-253] (int, 0-1)
+
+------------------------------------------------------
+qtl_rng_feature
+
+- date: date of log RV for which the features are constructed [t] (string, 'yyyy-mm-dd')
+- qtl_rng_lag1: quantile range of the previous trading day [t-1] (float)
+- qtl_rng_avg5: average quantile range over previous 5 trading days [t-1, t-2, ..., t-5] (float)
+- qtl_rng_avg22: average quantile range over previous 22 trading days [t-1, t-2, ..., t-22] (float)
+- qtl_rng_avg253: average quantile range over previous 253 trading days [t-1, t-2, ..., t-253] (float)
+- qtl_rng_up: binary variable taking value 1 if qtl_rng_avg22 > qtl_rng_avg253, and 0 otherwise [t-1, t-2, ..., t-253] (int, 0-1)
+
+------------------------------------------------------
+Notes:
+
+* The time indices inside [] after the variable description indicate the range of
+  dates involved in calculating the value of the variable, relative to the date in
+  the date column. E.g., if date is '2021-08-20', then [t-1] means the date of the
+  previous trading day, which is 2021-08-19.
+
+* Averaging periods: there are approximately 5 trading days in a week, 22 trading
+  days in a month, and 253 trading days in a year.
+
+* The three binary variables (log_rv_up, rng_up, qtl_rng_up) can be interpreted as
+  trend indicators with 1 indicating an upward trend and 0 indicating a downward
+  trend. E.g., if the current weekly average of log RV (log_rv_avg22) is higher than
+  the annual average (log_rv_ave253), it means that log RV is on a recent upward trend.
