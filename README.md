@@ -1,5 +1,5 @@
 # LogRV Forecast Model
-A project aims to develop a predictive model for the log RV of daily stock returns of the Commonwealth Bank of Australia (CBA) using the dataset provided.
+This project aims to develop a predictive model for the log RV of daily stock returns of the Commonwealth Bank of Australia (CBA) using the dataset provided.
 
 <img src="https://images.squarespace-cdn.com/content/v1/5820f7b06b8f5b12160c7941/1507509923141-3LZQW12NQS1F0L2YGCWG/Volatility.jpg" width="400"/>
 
