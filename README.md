@@ -14,6 +14,9 @@ $RV_t = \sum{r^2}$
 The dataset contains the observed values of log RV and a set of potential features constructed using intra-daily returns 
 (based on prices sampled at 5-minute intervals) of CBA from January 7, 2003 to August 20, 2021
 
+### Dataset
+Connect to the "cba_log_rv.sqlite" SQLite database using the Python sqlite3 module
+
 ### Methods Used
 - Machine Learning
 - Data Visualization
